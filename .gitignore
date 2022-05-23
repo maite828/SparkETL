@@ -1,9 +1,11 @@
 # Default ignored files
+/workspace.xml
 *~
 *.war
 *.ear
 *.out
 *.log
+project/*.properties
 # Jetbrains folder
 .idea
 venv/*
