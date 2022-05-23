@@ -1,6 +1,9 @@
 package com.spark.etl.utils
 
-object TableColumnConstants {
+/**
+ *
+ */
+package object TableColumnConstants {
 
   val itemNbr = "itemNumber"
   val itemNm =  "ItemName"

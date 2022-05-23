@@ -1,7 +1,7 @@
 package com.spark.etl
 
-import com.spark.etl.workflows.workflow.{ItemSalesWorkflow, StoreSalesWorkflow, WorkFlowTrait}
 import com.spark.etl.utils.{Utils, StringConstantsUtil => StrConst}
+import com.spark.etl.workflows.workflow.{ItemSalesWorkflow, StoreSalesWorkflow, WorkFlowTrait}
 import org.apache.log4j.Logger
 import org.apache.spark.sql.DataFrame
 
@@ -11,7 +11,7 @@ import org.apache.spark.sql.DataFrame
 
 object WorkFlowManager {
 
-  val log = Logger.getLogger(this.getClass.getName)
+  val log: Logger = Logger.getLogger(this.getClass.getName)
 
   def manageWorkFlow(paramsMap:Map[String, Any]) : Unit = {
 
@@ -31,7 +31,7 @@ object WorkFlowManager {
 
     workflowInstance match {
 
-        case Some(x) => executeFlow(paramsMap, workflowInstance.get)
+        case Some(_) => executeFlow(paramsMap, workflowInstance.get)
 
         case None => log.error("No Workflow implementation available")
     }
@@ -51,7 +51,7 @@ object WorkFlowManager {
 
     log.info("Running " + paramsMap.get(StrConst.WORKFLOW) + " having " + printString)
 
-    extractorsSet.map {
+    extractorsSet.foreach {
       ext => {
         val result = ext.extract(paramsMap, Some(resultantDFMap))
         result match {
@@ -61,7 +61,7 @@ object WorkFlowManager {
       }
     }
 
-    transformersSet.map {
+    transformersSet.foreach {
 
       trans => {
         val result = trans.transform(paramsMap, resultantDFMap)
@@ -70,8 +70,7 @@ object WorkFlowManager {
     }
 
 
-    loadersSet.map{
-
+    loadersSet.foreach{
       loader => {
         loader.load(paramsMap, resultantDFMap)
       }

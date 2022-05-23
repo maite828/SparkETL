@@ -8,10 +8,10 @@ class StoreSalesTransformer extends TransformTrait {
   override def transform(paramsMap: Map[String, Any], dataFrameMap:
   Map[String, DataFrame]): Map[String, DataFrame] = {
 
-    val log = Logger.getLogger(this.getClass.getName)
+    val log: Logger = Logger.getLogger(this.getClass.getName)
 
-    val salesDF = dataFrameMap.get("salesDF").get
-    val storeDF = dataFrameMap.get("storeDF").get
+    val salesDF = dataFrameMap("salesDF")
+    val storeDF = dataFrameMap("storeDF")
 
     val salesStrExpr = storeDF.col(TC.strNbr) === salesDF.col(TC.strNbr)
 

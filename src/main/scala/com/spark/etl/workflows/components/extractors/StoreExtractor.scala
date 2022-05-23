@@ -7,7 +7,7 @@ class StoreExtractor extends ExtractorTrait {
   override def extract(paramsMap: Map[String, Any], extractedDF:
         Option[Map[String, DataFrame]]): Option[Map[String, DataFrame]] = {
 
-    val log = Logger.getLogger(this.getClass.getName)
+    val log: Logger = Logger.getLogger(this.getClass.getName)
 
     val storeDF = SparkIOUtil.read("./data/store.csv")
 

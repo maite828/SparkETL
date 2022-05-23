@@ -14,8 +14,8 @@ object SparkIOUtil {
 
   def configureSpark(configMap : Map[String,Any]):Unit={
 
-    val appName = configMap.get(StrConst.WORKFLOW).get.toString
-    val master = configMap.get(StrConst.MASTER).get.toString
+    val appName = configMap(StrConst.WORKFLOW).toString
+    val master = configMap(StrConst.MASTER).toString
 
     val sparkSession = SparkSession.builder().appName(appName).master(master)
 
@@ -51,7 +51,7 @@ object SparkIOUtil {
 
   }
 
-  def getSparkSession():SparkSession = spark
+  def getSparkSession:SparkSession = spark
 
 
   def execute(sql:String):Unit={
